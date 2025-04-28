@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-const ai = new GoogleGenAI({ apiKey:  process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey:  import.meta.env.VITE_API_KEY  });
 
 async function runChat(prompt) {
   const response = await ai.models.generateContent({
