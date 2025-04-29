@@ -7,7 +7,7 @@ export const Context = createContext();
 const ContextProvider = (prop) => {
     const [input, setInput] = useState("");
     const [recentPrompt, setRecentPrompt] = useState("");
-    const [prevPrompt, setPrevPrompt] = useState([]);
+    const [PrevPrompt, setPrevPrompt] = useState([]);
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("")
@@ -15,16 +15,30 @@ const ContextProvider = (prop) => {
     const delayPara=(index,nextWord)=>{
          setTimeout(function(){
                setResultData(prev=>  prev+nextWord);
-         }, 75*index)
+         }, 50*index)
+    }
+
+    const newChat=()=>{
+        setLoading(false)
+        setShowResult(false)
     }
     const onSent = async (prompt) => {
         setResultData("")
         setLoading(true)
         setShowResult(true)
-        setRecentPrompt(input)
-        setPrevPrompt(prev=>[...prev,input])
+        let response;
+        if(prompt!= undefined){
+            response = await runChat(prompt)
+            setRecentPrompt(prompt)
+        }
+        else{
+            setPrevPrompt(prev=> [...prev,input])
+            setRecentPrompt(input)
+            response=await runChat(input)
+        }
+      
         try{
-        const response = await runChat(input);
+       
         let responseArray= response.split('**');
         let newResponse="" ;
         for(let i=0;i<responseArray.length;i++){
@@ -53,7 +67,7 @@ const ContextProvider = (prop) => {
     };
 
     const contextValue = {
-        prevPrompt,
+        PrevPrompt,
         setPrevPrompt,
         onSent,
         setRecentPrompt,
@@ -63,6 +77,7 @@ const ContextProvider = (prop) => {
         resultData,
         input,
         setInput,
+        newChat,
     }
 
 

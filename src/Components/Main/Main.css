@@ -184,3 +184,43 @@
     font-weight: 300;
     line-height:1.8 ;
 }
+
+@media (max-width:600px) {
+    .main-bottom input{
+        flex: none;
+        width: 180px;
+    }
+    .main-bottom img{
+        width: 20px;
+    }
+    .search-box{
+        padding:5px 10px;
+    }
+    .search-box div{
+        gap: 5px;
+    }
+   
+    
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .input-wrapper input {
+    width: 100%;
+    padding: 5px;
+    font-size: 1rem;
+  }
+  
+  .animated-placeholder {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    font-size: 1rem;
+  }
+  
