@@ -1,13 +1,23 @@
-import { GoogleGenAI } from "@google/genai";
-const ai = new GoogleGenAI({ apiKey:  import.meta.env.VITE_API_KEY  });
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
 
 async function runChat(prompt) {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: prompt,
-  });
-  console.log(response.text);
-  return response.text
+  try {
+    
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    return response.text();
+  } catch (error) {
+    console.error("runChat Error:", error);
+    
+    if (error.message.includes("429")) {
+      throw new Error("QUOTA_EXCEEDED");
+    }
+    throw error;
+  }
 }
 
 export default runChat;

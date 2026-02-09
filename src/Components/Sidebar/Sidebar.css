@@ -64,6 +64,17 @@ padding: 25px 15px;
     padding-right: 10px;
     cursor: pointer;
 }
+.Sidebar .gem_img img{
+  
+   width: 30px;
+   transform: translate(-13%);
+  
+}
+.Sidebar .gem_img{
+    align-items: center;
+    gap: 0px;
+}
+
 
 @media (max-width:600px){
     .Sidebar{

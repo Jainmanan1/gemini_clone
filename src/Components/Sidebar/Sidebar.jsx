@@ -56,6 +56,19 @@ const Sidebar = () => {
 
       </div>
       <div className="bottom">
+      <div className='bottom-item recent-entry gem_img' title="Gem mananger">
+          <img src={assets.gem_icon} alt="" />
+          {extended ? (
+            <TypeAnimation
+              sequence={['Gem manager', 1000]}
+              speed={50}
+              wrapper="p"
+              repeat={Infinity}
+              cursor={false}
+            />
+          ) : null}
+        </div>
+
         <div className='bottom-item recent-entry' title="Help">
           <img src={assets.question_icon} alt="" />
           {extended ? (
